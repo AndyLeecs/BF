@@ -2,7 +2,9 @@ package rmi;
 
 import java.rmi.Remote;
 
+import service.ExecuteService;
 import service.IOService;
+import service.TransformService;
 import service.UserService;
 
 public class RemoteHelper {
@@ -25,5 +27,13 @@ public class RemoteHelper {
 	
 	public UserService getUserService(){
 		return (UserService)remote;
+	}
+	
+	public ExecuteService getExecuteService(){
+		return (ExecuteService)remote;
+	}
+	
+	public TransformService getTransformService(){
+		return (TransformService)remote;
 	}
 }

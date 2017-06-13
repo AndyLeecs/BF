@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 import rmi.RemoteHelper;
 import service.IOService;
+import service.Language;
 import ui.MainFrame;
 
 public class ClientRunner {
@@ -32,13 +33,13 @@ public class ClientRunner {
 	}
 	
 	private void initGUI() {
-		MainFrame mainFrame = new MainFrame();
+		Login login = new Login();
 	}
 	
 	public void test(){
 		try {
 			System.out.println(remoteHelper.getUserService().login("admin", "123456a"));
-			System.out.println(remoteHelper.getIOService().writeFile("2", "admin", "testFile"));
+			System.out.println(remoteHelper.getIOService().writeFile("2", "admin", "testFile",Language.bf));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

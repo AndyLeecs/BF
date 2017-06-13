@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<fx:root fx:id="gridpane" opacity="1.0" prefHeight="800.0" prefWidth="1200.0" type="GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWinController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="NEVER" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="758.0" minWidth="10.0" prefWidth="382.0" />
+    <ColumnConstraints hgrow="NEVER" maxWidth="627.0" minWidth="10.0" prefWidth="608.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="613.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="613.0" minWidth="0.0" prefWidth="0.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="42.0" minHeight="0.0" prefHeight="36.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="490.0" minHeight="10.0" prefHeight="490.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="274.0" vgrow="NEVER" />
+  </rowConstraints>
+   <children>
+      <ImageView fitHeight="40.0" fitWidth="1200.0" pickOnBounds="true">
+         <image>
+            <Image url="file:///D:/BF/git/BF/src/img/menu_with_button.jpg" />
+         </image>
+      </ImageView>
+      <TextArea id="maintextarea" fx:id="mainTextArea" opacity="0.0" prefHeight="570.0" prefWidth="1200.0" wrapText="true" GridPane.columnSpan="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+      <TextArea fx:id="inputTextArea" opacity="0.0" prefHeight="55.0" prefWidth="610.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <ImageView fitHeight="30.0" fitWidth="1203.0" opacity="0.42" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+         <image>
+            <Image url="file:///D:/BF/git/BF/src/img/scalecolor.jpg" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" prefHeight="30.0" prefWidth="600.0" text="input" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Label alignment="CENTER" prefHeight="30.0" prefWidth="600.0" text="output" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Label fx:id="output" alignment="CENTER" contentDisplay="BOTTOM" prefHeight="214.0" prefWidth="608.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button fx:id="user" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="191.0" text="Button" wrapText="true" />
+      <MenuBar fx:id="menubar" opacity="0.5" prefHeight="76.0" prefWidth="1204.0" GridPane.columnSpan="3">
+        <menus>
+            <Menu fx:id="filemenu" mnemonicParsing="false" text="                            ">
+            </Menu>
+          <Menu fx:id="filemenu" mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="newfile" mnemonicParsing="false" onAction="#newSetOnAction" text="New" />
+                  <MenuItem fx:id="open" mnemonicParsing="false" onAction="#openSetOnAction" text="Open" />
+                  <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveSetOnAction" text="Save" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitSetOnAction" text="Exit" />
+            </items>
+          </Menu>
+          <Menu fx:id="executemenu" mnemonicParsing="false" text="Execute">
+            <items>
+              <MenuItem fx:id="run" mnemonicParsing="false" onAction="#runSetOnAction" text="Run" />
+            </items>
+          </Menu>
+          <Menu fx:id="version" mnemonicParsing="false" text="Version" />
+        </menus>
+      </MenuBar>
+      <ImageView fitHeight="246.0" fitWidth="6.0" opacity="0.55" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+         <image>
+            <Image url="file:///D:/BF/git/BF/src/img/scalecolor.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</fx:root>

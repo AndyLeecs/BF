@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 
 import rmi.RemoteHelper;
+import service.Language;
 
 
 public class MainFrame extends JFrame {
@@ -83,7 +84,7 @@ public class MainFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String code = textArea.getText();
 			try {
-				RemoteHelper.getInstance().getIOService().writeFile(code, "admin", "code");
+				RemoteHelper.getInstance().getIOService().writeFile(code, "admin", "code",Language.bf);
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
