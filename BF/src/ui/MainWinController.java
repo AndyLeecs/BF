@@ -1,12 +1,15 @@
 package ui;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import rmi.RemoteHelper;
 import service.Language;
@@ -28,6 +31,10 @@ public class MainWinController
 	public TextArea inputTextArea;
 	@FXML
 	public Button user;
+//	@FXML
+//	public Tooltip tooltip;
+	@FXML
+	public Label outputLabel;
 	@FXML
 	public MenuItem newfile;
 	@FXML
@@ -40,20 +47,30 @@ public class MainWinController
 	public MenuItem run;
 	@FXML
 	public MenuItem version;
+	@FXML
+	public MenuItem logout;
+	
+	@FXML
+	void initialize(){
+		mainTextArea.setDisable(true);
+		inputTextArea.setDisable(true);
+		
+	}
 	
 	@FXML
 	public void newSetOnAction(){
-		try {
-			RemoteHelper.getInstance().getIOService().writeFile(file,userId,fileName,l);
-		} catch (RemoteException e1) {
-			e1.printStackTrace();
-		}
-
+		mainTextArea.setDisable(false);
+		inputTextArea.setDisable(false);
 	}
 	
 	@FXML
 	public void openSetOnAction(){
-		
+		try {
+			RemoteHelper.getInstance().getIOService().readFileList(userId);
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+
 	}
 	
 	@FXML
@@ -71,9 +88,11 @@ public class MainWinController
 	public void exitSetOnAction(){
 		Platform.runLater(() ->
 		{
-			
+			mainTextArea.setDisable(true);
+			inputTextArea.setDisable(true);
+			outputLabel.setText("");
 			// StorySelectBox ssb = new StorySelectBox(9);
-			gridpane.getScene().getWindow().hide();
+//			gridpane.getScene().getWindow().hide();
 		});
 
 	}
@@ -88,6 +107,24 @@ public class MainWinController
 			e1.printStackTrace();
 		}
 
+	}
+	
+	@FXML
+	public void logoutSetOnAction(){
+		Platform.runLater(() ->{
+			try
+			{
+				new Login();
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		gridpane.getScene().getWindow().hide();
+		
+	});
+		
+		
 	}
 	
 	

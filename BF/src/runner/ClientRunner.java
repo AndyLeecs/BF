@@ -1,5 +1,6 @@
 package runner;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -8,6 +9,7 @@ import java.rmi.RemoteException;
 import rmi.RemoteHelper;
 import service.IOService;
 import service.Language;
+import ui.Login;
 import ui.MainFrame;
 
 public class ClientRunner {
@@ -33,7 +35,11 @@ public class ClientRunner {
 	}
 	
 	private void initGUI() {
+		try{
 		Login login = new Login();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void test(){
