@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml">
-	<!-- TODO Add Nodes -->
-</GridPane>
 
+<GridPane prefHeight="800.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <TextField fx:id="textField" />
+      <PasswordField fx:id="passwordField" GridPane.rowIndex="1" />
+      <Button fx:id="LoginButton" mnemonicParsing="false" onAction="#LoginButtonOnAction" text="Button" GridPane.rowIndex="2" />
+      <Label fx:id="tip" text="Label" GridPane.rowIndex="3" />
+      <Button fx:id="newComer" mnemonicParsing="false" onAction="#newComerOnAction" text="Button" GridPane.rowIndex="4" />
+      <Button fx:id="exit" mnemonicParsing="false" onAction="#exitOnAction" text="Button" GridPane.rowIndex="5" />
+   </children>
+</GridPane>

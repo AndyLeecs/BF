@@ -35,7 +35,7 @@
          </image>
       </ImageView>
       <TextArea id="maintextarea" fx:id="mainTextArea" opacity="0.0" prefHeight="570.0" prefWidth="1200.0" wrapText="true" GridPane.columnSpan="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-      <TextArea fx:id="inputTextArea" opacity="0.0" prefHeight="55.0" prefWidth="610.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <TextArea fx:id="inputTextArea" opacity="0.0" prefHeight="55.0" prefWidth="610.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
       <ImageView fitHeight="30.0" fitWidth="1203.0" opacity="0.42" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
          <image>
             <Image url="file:///D:/BF/git/BF/src/img/scalecolor.jpg" />
@@ -53,8 +53,21 @@
                </items></Menu>
           <Menu fx:id="filemenu" mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="newfile" mnemonicParsing="false" onAction="#newSetOnAction" text="New" />
-                  <MenuItem fx:id="open" mnemonicParsing="false" onAction="#openSetOnAction" text="Open" />
+                  <Menu fx:id="newfile" mnemonicParsing="false" onAction="#newSetOnAction" text="New">
+                    <items>
+                      <MenuItem mnemonicParsing="false">
+                           <graphic>
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="filename_field" />
+                                    <ComboBox fx:id="language" editable="true" onAction="#languageSetOnAction" prefWidth="150.0" />
+                                    <Button fx:id="name_submit_button" mnemonicParsing="false" onAction="#name_submit_buttonSetOnAction" text="OK" />
+                                 </children>
+                              </HBox>
+                           </graphic></MenuItem>
+                    </items>
+                  </Menu>
+                  <Menu fx:id="open" mnemonicParsing="false" onAction="#openSetOnAction" text="Open" />
                   <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveSetOnAction" text="Save" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitSetOnAction" text="Exit" />
             </items>
@@ -64,7 +77,7 @@
               <MenuItem fx:id="run" mnemonicParsing="false" onAction="#runSetOnAction" text="Run" />
             </items>
           </Menu>
-          <Menu fx:id="version" mnemonicParsing="false" text="Version" />
+          <Menu fx:id="version" mnemonicParsing="false" onAction="#versionSetOnAction" text="Version" />
         </menus>
       </MenuBar>
       <ImageView fitHeight="246.0" fitWidth="6.0" opacity="0.55" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">

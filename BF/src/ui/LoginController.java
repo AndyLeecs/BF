@@ -76,6 +76,26 @@ public class LoginController
 		textField.setPromptText("新来的写个名儿");
 		passwordField.setPromptText("新来的输个密码");
 		//没有实现密码确认
+		try{
+			if(RemoteHelper.getInstance().getUserService().register(textField.getText(),passwordField.getText()))
+				Platform.runLater(()->{
+				try
+				{
+					
+					new MainWin();
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gridpane.getScene().getWindow().hide();
+				});	
+			else{
+				tip.setText("医院关门儿啦");
+			}
+		}catch(RemoteException e){
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

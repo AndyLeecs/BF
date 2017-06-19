@@ -10,5 +10,5 @@ public interface UserService extends Remote{
 	//把返回值改成了void，因为并不知道boolean有啥用
 	public void logout(String username) throws RemoteException;
 	
-	public void register(String username, String password) throws RemoteException;
+	public boolean register(String username, String password) throws RemoteException;
 }
