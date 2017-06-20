@@ -17,7 +17,7 @@ public class State
 
 private static Language language = Language.bf;
 
-	private static File[] files = new File(username).listFiles();//获取该文件夹下所有的文件(夹)名
+	private static File[] files;//获取该文件夹下所有的文件(夹)名
 	
 	public static String getUsername()
 	{
@@ -36,7 +36,8 @@ private static Language language = Language.bf;
 
 	public void setFiles(File[] files)
 	{
-		this.files = files;
+		this.files = new File(username).listFiles();
+		
 	}
 
 	public static Language getLanguage()

@@ -6,6 +6,9 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.stage.Stage;
 import rmi.RemoteHelper;
 import service.IOService;
 import service.Language;
@@ -18,6 +21,7 @@ public class ClientRunner {
 	public ClientRunner() {
 		linkToServer();
 		System.out.println("clientrunner");
+		final JFXPanel fxPanel = new JFXPanel();
 		initGUI();
 	}
 	
@@ -36,12 +40,23 @@ public class ClientRunner {
 	}
 	
 	private void initGUI() {
-		try{
-		Login login = new Login();
-		System.out.println("initGUI");
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+
+			Platform.runLater(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					try
+					{
+						new Login();
+
+					} catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+
+				}
+			});
 	}
 	
 	public void test(){
