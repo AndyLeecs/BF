@@ -36,7 +36,7 @@ public class MainWinController
 //	@FXML
 //	public Tooltip tooltip;
 	@FXML
-	public Label outputLabel;
+	public TextArea outputLabel;
 	@FXML
 	public Menu newfile;
 //	@FXML
@@ -71,6 +71,7 @@ public class MainWinController
 	void initialize(){
 		mainTextArea.setDisable(true);
 		inputTextArea.setDisable(true);
+		outputLabel.setDisable(true);
 		language.getItems().add("bf");
 		language.getItems().add("ook");
 		language.setValue("bf");
@@ -156,7 +157,7 @@ public class MainWinController
 		String code = mainTextArea.getText();
 		String param = inputTextArea.getText().replace(" ", "");
 		try {
-			RemoteHelper.getInstance().getTransformService().transform(code, param, State.getLanguage());
+			outputLabel.setText(RemoteHelper.getInstance().getTransformService().transform(code, param, State.getLanguage()));
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}

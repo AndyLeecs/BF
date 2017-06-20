@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.effect.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="gridpane" opacity="1.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWinController">
+<GridPane fx:id="gridpane" opacity="1.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWinController">
   <columnConstraints>
     <ColumnConstraints hgrow="NEVER" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
       <ColumnConstraints hgrow="NEVER" maxWidth="758.0" minWidth="10.0" prefWidth="382.0" />
@@ -29,6 +29,7 @@
     <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="274.0" vgrow="NEVER" />
   </rowConstraints>
    <children>
+      <TextArea fx:id="outputLabel" editable="false" maxHeight="247.0" minHeight="100.0" prefHeight="247.0" prefWidth="608.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <ImageView fitHeight="40.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
             <Image url="file:///D:/BF/git/BF/src/img/menu_with_button.jpg" />
@@ -43,15 +44,14 @@
       </ImageView>
       <Label alignment="CENTER" prefHeight="30.0" prefWidth="600.0" text="input" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
       <Label alignment="CENTER" prefHeight="30.0" prefWidth="600.0" text="output" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-      <Label fx:id="output" alignment="CENTER" contentDisplay="BOTTOM" prefHeight="214.0" prefWidth="608.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button fx:id="user" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="191.0" wrapText="true" />
-      <MenuBar fx:id="menubar" opacity="0.5" prefHeight="76.0" prefWidth="1204.0" GridPane.columnSpan="3">
+      <MenuBar opacity="0.5" prefHeight="76.0" prefWidth="1204.0" GridPane.columnSpan="3">
         <menus>
-            <Menu fx:id="filemenu" mnemonicParsing="false" text="                            ">
+            <Menu mnemonicParsing="false" text="                            ">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#logoutSetOnAction" text="Logout" />
+                  <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logoutSetOnAction" text="Logout" />
                </items></Menu>
-          <Menu fx:id="filemenu" mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="File">
             <items>
                   <Menu fx:id="newfile" mnemonicParsing="false" text="New">
                     <items>
@@ -72,7 +72,7 @@
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitSetOnAction" text="Exit" />
             </items>
           </Menu>
-          <Menu fx:id="executemenu" mnemonicParsing="false" text="Execute">
+          <Menu mnemonicParsing="false" text="Execute">
             <items>
               <MenuItem fx:id="run" mnemonicParsing="false" onAction="#runSetOnAction" text="Run" />
             </items>
