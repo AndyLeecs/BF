@@ -165,7 +165,21 @@ public class MainWinController
 	
 	@FXML
 	public void versionSetOnAction(){
-		
+		try {
+			String code = mainTextArea.getText();
+			String[]filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername()+"//"+filename);
+			for(int i = 0; (i < filelist.length)&&(i < MAX_FILE_LIST) ;i++){
+				open.getItems().add(new MenuItem(filelist[i]));
+				
+			}
+			
+			
+			
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+
+
 	}
 	
 	@FXML

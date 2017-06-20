@@ -17,13 +17,14 @@ public class ClientRunner {
 	
 	public ClientRunner() {
 		linkToServer();
+		System.out.println("clientrunner");
 		initGUI();
 	}
 	
 	private void linkToServer() {
 		try {
 			remoteHelper = RemoteHelper.getInstance();
-			remoteHelper.setRemote(Naming.lookup("rmi://127.0.0.1:8887/DataRemoteObject"));
+			remoteHelper.setRemote(Naming.lookup("rmi://localhost:8887/DataRemoteObject"));
 			System.out.println("linked");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -37,6 +38,7 @@ public class ClientRunner {
 	private void initGUI() {
 		try{
 		Login login = new Login();
+		System.out.println("initGUI");
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -53,6 +55,7 @@ public class ClientRunner {
 	
 	public static void main(String[] args){
 		ClientRunner cr = new ClientRunner();
+		System.out.println("main");
 		//cr.test();
 	}
 }
