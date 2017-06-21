@@ -5,6 +5,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -98,40 +101,77 @@ public class MainWinController
 
 	}
 	@FXML
-	public void newfileSetOnAction(){
-		initialize();
-	}
-	@FXML
 	public void name_submit_buttonSetOnAction(){
 		
 		filename = filename_field.getText();
+		System.out.println(filename);
 		if(language.getValue().equals("ook"))
 			State.setLanguage(Language.ook);
 		System.out.println(Language.ook.toString());
-		mainTextArea.clear();
-		inputTextArea.clear();
-		outputLabel.clear();
+//		mainTextArea.
+//		inputTextArea.clear();
+//		outputLabel.clear();
+		try
+		{
+			RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mainTextArea.setText("");
+		inputTextArea.setText("");
+		outputLabel.setText("");
 		mainTextArea.setDisable(false);
 		inputTextArea.setDisable(false);
 		outputLabel.setDisable(false);
+
+		
+		
 	
 	}
+	
+	private class itemEventHandler implements EventHandler<ActionEvent> {  
+		  
+	    @Override  
+	    public void handle(ActionEvent event) {  
+	        String fileName=((MenuItem)event.getSource()).getText();//得到版本名
+	        
+			String result = "";
+			try
+			{
+				result = RemoteHelper.getInstance().getIOService().readFile(State.getUsername(),((MenuItem) event.getSource()).getText(),State.getLanguage());
+			} catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			mainTextArea.setText(result);
+	    }  
+	} 
 	
 	@FXML
 	public void openSetOnAction(){
 		try {
 			
 			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
-			
+			open.getItems().clear();
 			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
-				if(!open.getItems().contains(new MenuItem(filelist.get(i))))
+				
 				open.getItems().add(new MenuItem(filelist.get(i)));
+				MenuItem newitem = new MenuItem(filelist.get(i));
+				newitem.setOnAction(new itemEventHandler());
+		    
+				
+				System.out.println(filelist.get(i));
+				
+				}
 				
 			}
 			
 			
 			
-		} catch (RemoteException e1) {
+		catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
 		

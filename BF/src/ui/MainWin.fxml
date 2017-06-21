@@ -53,7 +53,7 @@
                </items></Menu>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <Menu fx:id="newfile" mnemonicParsing="false" onAction="#newfileSetOnAction" text="New">
+                  <Menu fx:id="newfile" mnemonicParsing="false" text="New">
                     <items>
                       <MenuItem mnemonicParsing="false">
                            <graphic>
@@ -67,7 +67,7 @@
                            </graphic></MenuItem>
                     </items>
                   </Menu>
-                  <Menu fx:id="open" mnemonicParsing="false" onAction="#openSetOnAction" text="Open" />
+                  <Menu fx:id="open" mnemonicParsing="false" onShowing="#openSetOnAction" text="Open" />
                   <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveSetOnAction" text="Save" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitSetOnAction" text="Exit" />
             </items>
