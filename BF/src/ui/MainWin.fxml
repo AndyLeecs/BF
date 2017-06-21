@@ -53,7 +53,7 @@
                </items></Menu>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <Menu fx:id="newfile" mnemonicParsing="false" text="New">
+                  <Menu fx:id="newfile" mnemonicParsing="false" onAction="#newfileSetOnAction" text="New">
                     <items>
                       <MenuItem mnemonicParsing="false">
                            <graphic>

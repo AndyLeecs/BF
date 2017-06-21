@@ -50,6 +50,8 @@ public class MainWinController
 	public ComboBox<String> language;
 	@FXML
 	public Button name_submit_button;
+//	@FXML
+//	public Menu newfile;
 	@FXML
 	public Menu open;
 	@FXML
@@ -95,7 +97,10 @@ public class MainWinController
 		}
 
 	}
-	
+	@FXML
+	public void newfileSetOnAction(){
+		initialize();
+	}
 	@FXML
 	public void name_submit_buttonSetOnAction(){
 		
@@ -103,6 +108,9 @@ public class MainWinController
 		if(language.getValue().equals("ook"))
 			State.setLanguage(Language.ook);
 		System.out.println(Language.ook.toString());
+		mainTextArea.clear();
+		inputTextArea.clear();
+		outputLabel.clear();
 		mainTextArea.setDisable(false);
 		inputTextArea.setDisable(false);
 		outputLabel.setDisable(false);
@@ -111,20 +119,21 @@ public class MainWinController
 	
 	@FXML
 	public void openSetOnAction(){
-//		try {
-//			
-//			String[]filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername());
-//			
-//			for(int i = 0; (i < filelist.length)&&(i < MAX_FILE_LIST) ;i++){
-//				open.getItems().add(new MenuItem(filelist[i]));
-//				
-//			}
-//			
-//			
-//			
-//		} catch (RemoteException e1) {
-//			e1.printStackTrace();
-//		}
+		try {
+			
+			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
+			
+			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
+				if(!open.getItems().contains(new MenuItem(filelist.get(i))))
+				open.getItems().add(new MenuItem(filelist.get(i)));
+				
+			}
+			
+			
+			
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		
 
 	}
