@@ -52,10 +52,35 @@ public class LoginController
 		if((textField.getText()!=null && !textField.getText().isEmpty())
 			&&(passwordField.getText()!=null&&!passwordField.getText().isEmpty())){
 			try{
-				if(RemoteHelper.getInstance().getUserService().login(textField.getText(),passwordField.getText())||newcomer)
+				if(newcomer){
+					try{
+					if(RemoteHelper.getInstance().getUserService().register(textField.getText(),passwordField.getText())){
+							Platform.runLater(()->{
+								try
+								{
+									State.setUsername(textField.getText());
+									new MainWin();
+								} catch (IOException e)
+								{
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								gridpane.getScene().getWindow().hide();
+								});	}
+							else{
+								tip.setText("这傻名儿有人用");
+							}
+						}catch(RemoteException e){
+							e.printStackTrace();
+					
+				}
+				}
+				
+			else if(RemoteHelper.getInstance().getUserService().login(textField.getText(),passwordField.getText()))
 					Platform.runLater(()->{
 					try
 					{
+						State.setUsername(textField.getText());
 						new MainWin();
 					} catch (IOException e)
 					{
@@ -81,27 +106,29 @@ public class LoginController
 		passwordField.setPromptText("新来的输个密码");
 		newcomer = true;
 		//没有实现密码确认
-		try{
-			if(RemoteHelper.getInstance().getUserService().register(textField.getText(),passwordField.getText()))
-//				Platform.runLater(()->{
-//				try
-//				{
-//					
-//					new MainWin();
-//				} catch (IOException e)
-//				{
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				gridpane.getScene().getWindow().hide();
-//				});	
-//			else{
-//				tip.setText("医院关门儿啦");
-				newcomer = true;
-			}
-		catch(RemoteException e){
-			e.printStackTrace();
-		}
+//		try{
+//			RemoteHelper.getInstance().getUserService().register(textField.getText(),passwordField.getText())
+////				Platform.runLater(()->{
+////				try
+////				{
+////					
+////					new MainWin();
+////				} catch (IOException e)
+////				{
+////					// TODO Auto-generated catch block
+////					e.printStackTrace();
+////				}
+////				gridpane.getScene().getWindow().hide();
+////				});	
+////			else{
+////				tip.setText("医院关门儿啦");
+//				newcomer = true;
+//			else
+//				tip.setText("艾玛这傻名有人用了");
+//			}
+//		catch(RemoteException e){
+//			e.printStackTrace();
+//		}
 	}
 	
 	@FXML

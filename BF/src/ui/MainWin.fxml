@@ -29,7 +29,7 @@
     <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="274.0" vgrow="NEVER" />
   </rowConstraints>
    <children>
-      <TextArea fx:id="outputLabel" editable="false" maxHeight="247.0" minHeight="100.0" prefHeight="247.0" prefWidth="608.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <TextArea fx:id="outputLabel" editable="true" maxHeight="244.0" maxWidth="603.0" minHeight="100.0" prefHeight="244.0" prefWidth="603.0" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <ImageView fitHeight="40.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
             <Image url="file:///D:/BF/git/BF/src/img/menu_with_button.jpg" />

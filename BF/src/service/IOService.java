@@ -3,6 +3,7 @@ package service;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 
 public interface IOService extends Remote{
@@ -10,5 +11,5 @@ public interface IOService extends Remote{
 	
 	public String readFile(String userId, String fileName, Language l)throws RemoteException;
 	
-	public String[] readFileList(String userId)throws RemoteException;
+	public ArrayList<String> readFileList(String userId, Language l)throws RemoteException;
 }
