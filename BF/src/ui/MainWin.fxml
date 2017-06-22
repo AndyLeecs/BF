@@ -72,12 +72,12 @@
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitSetOnAction" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Execute">
+          <Menu fx:id="execute" mnemonicParsing="false" text="Execute">
             <items>
               <MenuItem fx:id="run" mnemonicParsing="false" onAction="#runSetOnAction" text="Run" />
             </items>
           </Menu>
-          <Menu fx:id="version" mnemonicParsing="false" onAction="#versionSetOnAction" text="Version" />
+          <Menu fx:id="version" mnemonicParsing="false" onShowing="#versionSetOnAction" text="Version" />
         </menus>
       </MenuBar>
       <ImageView fitHeight="246.0" fitWidth="6.0" opacity="0.55" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">

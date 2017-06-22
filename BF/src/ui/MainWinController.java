@@ -62,6 +62,8 @@ public class MainWinController
 	@FXML
 	public MenuItem exit;
 	@FXML
+	public Menu execute;
+	@FXML
 	public MenuItem run;
 	@FXML
 	public Menu version;
@@ -88,16 +90,21 @@ public class MainWinController
 			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
 			
 			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
-				if(!open.getItems().contains(new MenuItem(filelist.get(i))))
-				open.getItems().add(new MenuItem(filelist.get(i)));
+				if(!open.getItems().contains(new MenuItem(filelist.get(i)))){
+					
+			MenuItem newitem = new MenuItem(filelist.get(i));
+				open.getItems().add(newitem);
+				newitem.setOnAction(new itemEventHandler());
 				
 			}
 			
 			
 			
-		} catch (RemoteException e1) {
+		}} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
+		
+		
 
 	}
 	@FXML
@@ -116,7 +123,7 @@ public class MainWinController
 			RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
 		} catch (RemoteException e)
 		{
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		mainTextArea.setText("");
@@ -143,15 +150,98 @@ public class MainWinController
 				result = RemoteHelper.getInstance().getIOService().readFile(State.getUsername(),((MenuItem) event.getSource()).getText(),State.getLanguage());
 			} catch (RemoteException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			mainTextArea.setText(result);
-	    }  
+			inputTextArea.setText("");
+			outputLabel.setText("");
+			lastcode = result;
+			
+		mainTextArea.setDisable(false);
+		inputTextArea.setDisable(false);
+		outputLabel.setDisable(false);
+		
+		filename = ((MenuItem) event.getSource()).getText().split("\\.")[0];
+ 
+		
+		try {
+			
+			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername()+"\\"+State.getLanguage() + "\\" + filename,State.getLanguage());
+			version.getItems().clear();
+			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
+				
+				//open.getItems().add(new MenuItem(filelist.get(i)));
+				MenuItem newitem = new MenuItem(filelist.get(i));
+				newitem.setOnAction(new versionItemEventHandler());
+				version.getItems().add(newitem);
+		    
+				
+				System.out.println(filelist.get(i));
+				
+				}
+				
+
+			
+	}catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+
+	    }
 	} 
-	
+
+	private class versionItemEventHandler implements EventHandler<ActionEvent> {  
+		  
+	    @Override  
+	    public void handle(ActionEvent event) {  
+	        
+	        
+			String result = "";
+			try
+			{
+				result = RemoteHelper.getInstance().getIOService().readFile(State.getUsername()+"\\"+State.getLanguage() + "\\" + filename,((MenuItem) event.getSource()).getText(),State.getLanguage());
+			} catch (RemoteException e)
+			{
+				e.printStackTrace();
+			}
+			mainTextArea.setText(result);
+			System.out.println("this version is " + result);
+			inputTextArea.setText("");
+			outputLabel.setText("");
+			lastcode = result;
+			
+		mainTextArea.setDisable(false);
+		inputTextArea.setDisable(false);
+		outputLabel.setDisable(false);
+		
+		
+		try {
+			
+			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername()+"\\"+State.getLanguage() + "\\" + filename,State.getLanguage());
+			version.getItems().clear();
+			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
+				
+				//open.getItems().add(new MenuItem(filelist.get(i)));
+				MenuItem newitem = new MenuItem(filelist.get(i));
+				newitem.setOnAction(new versionItemEventHandler());
+				version.getItems().add(newitem);
+		    
+				
+				System.out.println(filelist.get(i));
+				
+				}
+				
+
+			
+	}catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+
+	    }
+	} 
 	@FXML
 	public void openSetOnAction(){
+		System.out.println("open is clicked");
+		
 		try {
 			
 			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
@@ -168,25 +258,42 @@ public class MainWinController
 				
 				}
 				
+			
+				
+				ArrayList<String>filelist1 = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername()+"\\"+State.getLanguage() + "\\" + filename,State.getLanguage());
+				version.getItems().clear();
+				for(int i = 0; (i < filelist1.size())&&(i < MAX_FILE_LIST) ;i++){
+					
+					//open.getItems().add(new MenuItem(filelist.get(i)));
+					MenuItem newitem = new MenuItem(filelist1.get(i));
+					newitem.setOnAction(new versionItemEventHandler());
+					version.getItems().add(newitem);
+			    
+					
+					System.out.println(filelist1.get(i));
+					
+					}
+					
+
+				
+		}catch (RemoteException e1) {
+				e1.printStackTrace();
 			}
-			
-			
-			
-		catch (RemoteException e1) {
-			e1.printStackTrace();
-		}
+
+		    }
+
 		
 
-	}
+	
 
 
 	
 	
 	@FXML
 	public void saveSetOnAction(){
-		
+		System.out.println(lastcode);
 		String code = mainTextArea.getText();
-
+System.out.println(code);
 		if(!lastcode.equals(code)){
 		try {
 			System.out.println(code+State.getUsername()+filename+State.getLanguage());
@@ -213,6 +320,28 @@ public class MainWinController
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
+		
+		try {
+			
+			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername()+"\\"+State.getLanguage() + "\\" + filename,State.getLanguage());
+			version.getItems().clear();
+			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
+				
+				//open.getItems().add(new MenuItem(filelist.get(i)));
+				MenuItem newitem = new MenuItem(filelist.get(i));
+				newitem.setOnAction(new versionItemEventHandler());
+				version.getItems().add(newitem);
+		    
+				
+				System.out.println(filelist.get(i));
+				
+				}
+				
+
+			
+	}catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		}
 		
 //		Platform.runLater(() ->{
@@ -221,7 +350,7 @@ public class MainWinController
 //				new SelectWin();
 //			} catch (IOException e)
 //			{
-//				// TODO Auto-generated catch block
+//			
 //				e.printStackTrace();
 //			}
 //		
@@ -235,6 +364,10 @@ public class MainWinController
 	public void exitSetOnAction(){
 		Platform.runLater(() ->
 		{
+			
+			mainTextArea.setText("");
+			inputTextArea.setText("");
+			outputLabel.setText("");
 			mainTextArea.setDisable(true);
 			inputTextArea.setDisable(true);
 			outputLabel.setDisable(true);
@@ -242,6 +375,11 @@ public class MainWinController
 //			gridpane.getScene().getWindow().hide();
 		});
 
+	}
+	
+	@FXML
+	public void executeSetOnAction(){
+		System.out.println("execute is clicked");
 	}
 	
 	@FXML
@@ -258,23 +396,32 @@ public class MainWinController
 	
 	@FXML
 	public void versionSetOnAction(){
+		System.out.println("version is clicked");
 		try {
-			String code = mainTextArea.getText();
-			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername()+"//"+filename,State.getLanguage());
+			
+			ArrayList<String>filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername()+"\\"+State.getLanguage() + "\\" + filename,State.getLanguage());
+			version.getItems().clear();
 			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
-				open.getItems().add(new MenuItem(filelist.get(i)));
 				
-			}
+				//open.getItems().add(new MenuItem(filelist.get(i)));
+				MenuItem newitem = new MenuItem(filelist.get(i));
+				newitem.setOnAction(new versionItemEventHandler());
+				version.getItems().add(newitem);
+		    
+				
+				System.out.println(filelist.get(i));
+				
+				}
+				
+
 			
-			
-			
-		} catch (RemoteException e1) {
+	}catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
-
+		
 
 	}
-	
+
 	@FXML
 	public void logoutSetOnAction(){
 		Platform.runLater(() ->{
@@ -283,7 +430,7 @@ public class MainWinController
 				new Login();
 			} catch (IOException e)
 			{
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		gridpane.getScene().getWindow().hide();
