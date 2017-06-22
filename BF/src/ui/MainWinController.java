@@ -135,7 +135,7 @@ public class MainWinController
 		  
 	    @Override  
 	    public void handle(ActionEvent event) {  
-	        String fileName=((MenuItem)event.getSource()).getText();//得到版本名
+	        
 	        
 			String result = "";
 			try
@@ -158,9 +158,10 @@ public class MainWinController
 			open.getItems().clear();
 			for(int i = 0; (i < filelist.size())&&(i < MAX_FILE_LIST) ;i++){
 				
-				open.getItems().add(new MenuItem(filelist.get(i)));
+				//open.getItems().add(new MenuItem(filelist.get(i)));
 				MenuItem newitem = new MenuItem(filelist.get(i));
 				newitem.setOnAction(new itemEventHandler());
+				open.getItems().add(newitem);
 		    
 				
 				System.out.println(filelist.get(i));
