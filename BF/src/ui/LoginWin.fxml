@@ -13,7 +13,7 @@
    <children>
       <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../img/标题.jpg" />
+            <Image url="@../img/标题+.jpg" />
          </image>
       </ImageView>
       <TextField fx:id="textField" layoutX="179.0" layoutY="99.0" prefHeight="36.0" prefWidth="242.0">
