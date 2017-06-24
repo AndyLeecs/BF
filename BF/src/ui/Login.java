@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -19,12 +19,12 @@ import javafx.stage.StageStyle;
 public class Login extends Stage
 {
 
-	GridPane gridpane;
+	AnchorPane anchorpane;
 	
 	public Login() throws IOException{
-		gridpane = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		anchorpane = FXMLLoader.load(getClass().getResource("LoginWin.fxml"));
 		
-		Scene scene = new Scene(gridpane,1200,800);
+		Scene scene = new Scene(anchorpane,600,400);
 		scene.setFill(Color.TRANSPARENT);
 //		scene.getStylesheets().add(getClass().getResource("MainWin.css").toExternalForm());
 		

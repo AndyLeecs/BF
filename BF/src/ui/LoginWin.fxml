@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LoginController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../img/标题.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="textField" layoutX="179.0" layoutY="99.0" prefHeight="36.0" prefWidth="242.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="迷你简毡笔黑" size="18.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="179.0" layoutY="135.0" opacity="1.0" prefHeight="33.0" prefWidth="242.0">
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="迷你简毡笔黑" size="18.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="LoginButton" layoutX="259.0" layoutY="200.0" mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="36.0" prefWidth="96.0" text="我要进去">
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="迷你简毡笔黑" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="newComer" layoutX="517.0" layoutY="358.0" mnemonicParsing="false" onAction="#newComerOnAction" prefHeight="36.0" prefWidth="210.0" text="你是新来的？嘿嘿嘿" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="迷你简毡笔黑" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="tip" layoutX="420.0" layoutY="123.0" prefHeight="24.0" prefWidth="181.0" textAlignment="CENTER">
+         <font>
+            <Font name="迷你简毡笔黑" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="exit" layoutY="368.0" mnemonicParsing="false" onAction="#exitOnAction" prefHeight="36.0" prefWidth="210.0" text="寻找代码之外的乐趣" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="迷你简毡笔黑" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

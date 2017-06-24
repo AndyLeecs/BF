@@ -3,12 +3,18 @@ package ui;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+import javax.swing.GroupLayout.Alignment;
+
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import rmi.RemoteHelper;
 
@@ -22,10 +28,11 @@ import rmi.RemoteHelper;
 public class LoginController
 {
 	@FXML
-	private GridPane gridpane;
+	private AnchorPane anchorpane;
 	@FXML
 	private TextField textField;
-	
+	@FXML
+	private ImageView imageView;
 	@FXML 
 	private PasswordField passwordField;
 	@FXML
@@ -41,15 +48,30 @@ public class LoginController
 	void initialize(){
 		textField.setPromptText("请输入精神病院患者名");
 		passwordField.setPromptText("请输入精神病院患者密码");
-		LoginButton.setText("我要进去");
-		newComer.setText("你是新来的？嘿嘿嘿");
+//		LoginButton.setText("我要进去");
+//		newComer.setText("你是新来的？嘿嘿嘿");
+//		exit.setText("我要出去");
 		newcomer = false;
+		
+		DoubleProperty x = new SimpleDoubleProperty();
+		x.set(400);
+		imageView.xProperty().bind(x);
+		anchorpane.heightProperty().add(x);
+		
+		DoubleProperty y = new SimpleDoubleProperty();
+		y.set(600);
+		imageView.yProperty().bind(y);
+		anchorpane.widthProperty().add(y);
+		
+		
 	}
 	
 	@FXML
 	public void LoginButtonOnAction(){
-
-		if((textField.getText()!=null && !textField.getText().isEmpty())
+if((textField.getText()==null)||(passwordField.getText() == null)||textField.getText().length() == 0 || passwordField.getText().length() == 0)
+	tip.setText("   呵呵");
+		
+	else if((textField.getText()!=null && !textField.getText().isEmpty())
 			&&(passwordField.getText()!=null&&!passwordField.getText().isEmpty())){
 			try{
 				if(newcomer){
@@ -65,10 +87,10 @@ public class LoginController
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
-								gridpane.getScene().getWindow().hide();
+								anchorpane.getScene().getWindow().hide();
 								});	}
 							else{
-								tip.setText("这傻名儿有人用");
+								tip.setText("   这傻名儿有人用");
 							}
 						}catch(RemoteException e){
 							e.printStackTrace();
@@ -87,10 +109,12 @@ public class LoginController
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					gridpane.getScene().getWindow().hide();
+					anchorpane.getScene().getWindow().hide();
 					});	
 				else{
-					tip.setText("正常人不让进的");
+					
+					tip.setText("   正常人不让进的");
+					
 				}
 			}catch(RemoteException e){
 				e.printStackTrace();
@@ -134,7 +158,7 @@ public class LoginController
 	@FXML
 	public void exitOnAction(){
 		Platform.runLater(() ->{
-			gridpane.getScene().getWindow().hide();
+			anchorpane.getScene().getWindow().hide();
 			System.exit(0);
 		});
 		
