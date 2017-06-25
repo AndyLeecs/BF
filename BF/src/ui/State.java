@@ -17,6 +17,10 @@ public class State
 
 private static Language language = Language.bf;
 
+private static String filename;
+
+private static boolean fileCreated = false;
+
 	private static File[] files;//获取该文件夹下所有的文件(夹)名
 	
 	public static String getUsername()
@@ -48,5 +52,25 @@ private static Language language = Language.bf;
 	public static void setLanguage(Language l)
 	{
 		State.language= l;
+	}
+
+	public static String getFilename()
+	{
+		return filename;
+	}
+
+	public static void setFilename(String filename)
+	{
+		State.filename = filename;
+	}
+
+	public static boolean isFileCreated()
+	{
+		return fileCreated;
+	}
+
+	public static void setFileCreated(boolean fileCreated)
+	{
+		State.fileCreated = fileCreated;
 	}
 }

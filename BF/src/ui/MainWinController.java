@@ -6,17 +6,17 @@ import java.util.ArrayList;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import rmi.RemoteHelper;
 import service.Language;
 
@@ -30,7 +30,7 @@ import service.Language;
 public class MainWinController
 {
 	@FXML
-	public GridPane gridpane;
+	public AnchorPane gridpane;
 	@FXML
 	public TextArea mainTextArea;
 	@FXML
@@ -48,6 +48,8 @@ public class MainWinController
 //	@FXML
 //	public MenuItem ook;
 	@FXML
+	public HBox fileNameBox;
+	@FXML
 	public TextField filename_field;
 	@FXML
 	public ComboBox<String> language;
@@ -55,6 +57,8 @@ public class MainWinController
 	public Button name_submit_button;
 //	@FXML
 //	public Menu newfile;
+	@FXML
+	public Text tip;
 	@FXML
 	public Menu open;
 	@FXML
@@ -108,6 +112,12 @@ public class MainWinController
 
 	}
 	@FXML
+	public void newFileSetOnAction(){
+		
+		fileNameBox.setVisible(true);
+		
+	}
+	@FXML
 	public void name_submit_buttonSetOnAction(){
 		
 		filename = filename_field.getText();
@@ -118,6 +128,24 @@ public class MainWinController
 //		mainTextArea.
 //		inputTextArea.clear();
 //		outputLabel.clear();
+		ArrayList<String> filelist;
+		try
+		{
+			filelist = RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
+			for(String s:filelist){
+				
+				System.out.println(s+"."+State.getLanguage());
+				if((filename+"."+State.getLanguage()).equals(s))
+					tip.setText("filename exists.");
+			}
+		
+		} catch (RemoteException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(!filename.equals("")){
 		try
 		{
 			RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(),State.getLanguage());
@@ -126,6 +154,9 @@ public class MainWinController
 			
 			e.printStackTrace();
 		}
+		fileNameBox.setVisible(false);
+	
+		
 		mainTextArea.setText("");
 		inputTextArea.setText("");
 		outputLabel.setText("");
@@ -134,7 +165,7 @@ public class MainWinController
 		outputLabel.setDisable(false);
 
 		
-		
+		}
 	
 	}
 	

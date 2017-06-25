@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -15,58 +20,25 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="gridpane" opacity="1.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWinController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="NEVER" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
-      <ColumnConstraints hgrow="NEVER" maxWidth="758.0" minWidth="10.0" prefWidth="382.0" />
-    <ColumnConstraints hgrow="NEVER" maxWidth="627.0" minWidth="10.0" prefWidth="608.0" />
-      <ColumnConstraints hgrow="NEVER" maxWidth="613.0" minWidth="0.0" prefWidth="0.0" />
-      <ColumnConstraints hgrow="NEVER" maxWidth="613.0" minWidth="0.0" prefWidth="0.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="42.0" minHeight="0.0" prefHeight="36.0" vgrow="NEVER" />
-    <RowConstraints maxHeight="490.0" minHeight="10.0" prefHeight="490.0" vgrow="NEVER" />
-    <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="274.0" vgrow="NEVER" />
-  </rowConstraints>
+<AnchorPane fx:id="gridpane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWinController">
    <children>
-      <TextArea fx:id="outputLabel" editable="true" maxHeight="244.0" maxWidth="603.0" minHeight="100.0" prefHeight="244.0" prefWidth="603.0" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <ImageView fitHeight="40.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
             <Image url="file:///D:/BF/git/BF/src/img/menu_with_button.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="mainTextArea" prefHeight="570.0" prefWidth="1200.0" wrapText="true" GridPane.columnSpan="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-      <TextArea fx:id="inputTextArea" maxHeight="244.0" prefHeight="244.0" prefWidth="592.0" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-      <ImageView fitHeight="30.0" fitWidth="1203.0" opacity="0.42" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
-         <image>
-            <Image url="file:///D:/BF/git/BF/src/img/scalecolor.jpg" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" prefHeight="30.0" prefWidth="600.0" text="input" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-      <Label alignment="CENTER" prefHeight="30.0" prefWidth="600.0" text="output" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-      <Button fx:id="user" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="191.0" wrapText="true" />
-      <MenuBar opacity="0.5" prefHeight="76.0" prefWidth="1204.0" GridPane.columnSpan="3">
+      <TextArea fx:id="mainTextArea" layoutY="38.0" prefHeight="570.0" prefWidth="1200.0" wrapText="true" GridPane.columnSpan="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+      <TextArea fx:id="outputLabel" editable="true" layoutX="597.0" layoutY="558.0" maxHeight="244.0" maxWidth="603.0" minHeight="100.0" prefHeight="244.0" prefWidth="603.0" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <MenuBar layoutY="1.0" opacity="0.5" prefHeight="38.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnSpan="3">
         <menus>
             <Menu mnemonicParsing="false" text="                            ">
                <items>
                   <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logoutSetOnAction" text="Logout" />
-               </items></Menu>
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <Menu fx:id="newfile" mnemonicParsing="false" text="New">
-                    <items>
-                      <MenuItem mnemonicParsing="false">
-                           <graphic>
-                              <HBox>
-                                 <children>
-                                    <TextField fx:id="filename_field" />
-                                    <ComboBox fx:id="language" editable="true" prefWidth="150.0" />
-                                    <Button fx:id="name_submit_button" mnemonicParsing="false" onAction="#name_submit_buttonSetOnAction" text="OK" />
-                                 </children>
-                              </HBox>
-                           </graphic></MenuItem>
-                    </items>
-                  </Menu>
+                  <Menu fx:id="newfile" mnemonicParsing="false" onAction="#newFileSetOnAction" text="New" />
                   <Menu fx:id="open" mnemonicParsing="false" onShowing="#openSetOnAction" text="Open" />
                   <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveSetOnAction" text="Save" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitSetOnAction" text="Exit" />
@@ -80,10 +52,27 @@
           <Menu fx:id="version" mnemonicParsing="false" onShowing="#versionSetOnAction" text="Version" />
         </menus>
       </MenuBar>
-      <ImageView fitHeight="246.0" fitWidth="6.0" opacity="0.55" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <ImageView fitHeight="246.0" fitWidth="6.0" layoutX="592.0" layoutY="556.0" opacity="0.55" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <image>
             <Image url="file:///D:/BF/git/BF/src/img/scalecolor.jpg" />
          </image>
       </ImageView>
+      <Label alignment="CENTER" layoutY="528.0" prefHeight="30.0" prefWidth="600.0" text="input" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Button fx:id="user" layoutY="2.0" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="191.0" wrapText="true" />
+      <TextArea fx:id="inputTextArea" layoutY="558.0" maxHeight="244.0" prefHeight="244.0" prefWidth="592.0" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <Label alignment="CENTER" layoutX="592.0" layoutY="528.0" prefHeight="30.0" prefWidth="600.0" text="output" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <ImageView fitHeight="30.0" fitWidth="1200.0" layoutY="528.0" opacity="0.42" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+         <image>
+            <Image url="file:///D:/BF/git/BF/src/img/scalecolor.jpg" />
+         </image>
+      </ImageView>
+      <HBox fx:id="fileNameBox" layoutX="376.0" layoutY="287.0" visible="false">
+         <children>
+            <TextField fx:id="filename_field" />
+            <ComboBox fx:id="language" editable="true" prefWidth="150.0" />
+            <Button fx:id="name_submit_button" mnemonicParsing="false" onAction="#name_submit_buttonSetOnAction" text="OK" />
+         </children>
+      </HBox>
+      <Text fx:id="tip" layoutX="574.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
-</GridPane>
+</AnchorPane>

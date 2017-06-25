@@ -20,7 +20,7 @@ import javafx.stage.StageStyle;
 
 public class MainWin extends Stage
 {
-	GridPane gridpane;
+	AnchorPane gridpane;
 	
 	public MainWin() throws IOException{
 		gridpane = FXMLLoader.load(getClass().getResource("MainWin.fxml"));
@@ -30,7 +30,7 @@ public class MainWin extends Stage
 //		scene.getStylesheets().add(getClass().getResource("MainWin.css").toExternalForm());
 		
 		this.setScene(scene);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.initStyle(StageStyle.TRANSPARENT);
 		this.show();
 		
