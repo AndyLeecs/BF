@@ -385,9 +385,18 @@ System.out.println(code);
 	@FXML
 	public void runSetOnAction(){
 		String code = mainTextArea.getText();
-		String param = inputTextArea.getText().replace(" ", "");
+		String param = inputTextArea.getText();
 		try {
-			outputLabel.setText(RemoteHelper.getInstance().getTransformService().transform(code, param, State.getLanguage()));
+			String s = RemoteHelper.getInstance().getTransformService().transform(code, param, State.getLanguage());
+			if(s.startsWith("Error:"))
+			{
+				s = s.replaceFirst("Error:", "");
+				outputLabel.setStyle("-fx-text-fill:red;");
+			
+			}else{
+				outputLabel.setStyle("-fx-text-fill:black;");
+			}
+			outputLabel.setText(s);
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
