@@ -25,13 +25,14 @@ public class MainWin extends Stage
 	public MainWin() throws IOException{
 		gridpane = FXMLLoader.load(getClass().getResource("MainWin.fxml"));
 		
-		Scene scene = new Scene(gridpane,1200,800);
+		Scene scene = new Scene(gridpane,1180,800);
 		scene.setFill(Color.TRANSPARENT);
 //		scene.getStylesheets().add(getClass().getResource("MainWin.css").toExternalForm());
-		
+		this.setTitle("BF&OOK Hospital!");
 		this.setScene(scene);
-		this.setResizable(true);
-		this.initStyle(StageStyle.TRANSPARENT);
+		this.setResizable(false);
+		this.initStyle(StageStyle.DECORATED);
+//		this.initStyle(StageStyle.TRANSPARENT);
 		this.show();
 		
 	}

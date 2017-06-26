@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout.Alignment;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import rmi.RemoteHelper;
 import service.Language;
 
@@ -48,9 +51,11 @@ public class MainWinController
 //	@FXML
 //	public MenuItem ook;
 	@FXML
+	public AnchorPane newFileAnchorPane;
+	@FXML
 	public HBox fileNameBox;
 	@FXML
-	public TextField filename_field;
+	public TextArea filename_field;
 	@FXML
 	public ComboBox<String> language;
 	@FXML
@@ -84,6 +89,7 @@ public class MainWinController
 		mainTextArea.setDisable(true);
 		inputTextArea.setDisable(true);
 		outputLabel.setDisable(true);
+		tip.setVisible(false);
 		language.getItems().add("bf");
 		language.getItems().add("ook");
 		language.setValue("bf");
@@ -113,8 +119,16 @@ public class MainWinController
 	}
 	@FXML
 	public void newFileSetOnAction(){
-		
+		newFileAnchorPane.setVisible(true);
 		fileNameBox.setVisible(true);
+//		filename_field.setMaxHeight(36.0);
+//		filename_field.setMinHeight(36.0);
+//		filename_field.setPrefHeight(36.0);
+
+//		filename_field.setPrefRowCount(1);
+//		filename_field.setStyle("-overflow-x:hidden;");
+		System.out.println(filename_field.getHeight());
+		System.out.println(filename_field.getWidth());
 		
 	}
 	@FXML
@@ -128,6 +142,33 @@ public class MainWinController
 //		mainTextArea.
 //		inputTextArea.clear();
 //		outputLabel.clear();
+		
+		//检查是否在允许的文字大小范围内
+		if(filename.length()>255)
+		{
+			tip.setText("longer than 255 chars.");
+			tip.setStyle("-fx-text-fill:red;");
+			tip.setTextAlignment(TextAlignment.CENTER);
+			tip.setVisible(true);
+			filename_field.setText("");
+			fileNameBox.setVisible(true);
+			return;
+
+		}
+		//检查是否含有非法字符
+		String[] illegalChars = new String[]{"/","\\",":","*","?","<",">","\"","|"};
+		for(String s:illegalChars)
+		if(filename.contains(s)){
+			tip.setText("contains illegal char '"+s+"'.");
+			tip.setStyle("-fx-text-fill:red;");
+			tip.setTextAlignment(TextAlignment.CENTER);
+			tip.setVisible(true);
+			filename_field.setText("");
+			fileNameBox.setVisible(true);
+			return;
+		}
+		
+		//检查是否有重名
 		ArrayList<String> filelist;
 		try
 		{
@@ -135,8 +176,15 @@ public class MainWinController
 			for(String s:filelist){
 				
 				System.out.println(s+"."+State.getLanguage());
-				if((filename+"."+State.getLanguage()).equals(s))
+				if((filename+"."+State.getLanguage()).equals(s)){
 					tip.setText("filename exists.");
+					tip.setStyle("-fx-text-fill:red;");
+					tip.setTextAlignment(TextAlignment.CENTER);
+					tip.setVisible(true);
+					filename_field.setText("");
+					fileNameBox.setVisible(true);
+					return;
+				}
 			}
 		
 		} catch (RemoteException e1)
@@ -155,8 +203,9 @@ public class MainWinController
 			e.printStackTrace();
 		}
 		fileNameBox.setVisible(false);
+		newFileAnchorPane.setVisible(false);
 	
-		
+		tip.setVisible(false);
 		mainTextArea.setText("");
 		inputTextArea.setText("");
 		outputLabel.setText("");
@@ -193,7 +242,7 @@ public class MainWinController
 		outputLabel.setDisable(false);
 		
 		filename = ((MenuItem) event.getSource()).getText().split("\\.")[0];
- 
+
 		
 		try {
 			
