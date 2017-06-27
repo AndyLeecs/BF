@@ -59,7 +59,9 @@ public class MainWinController
 	@FXML
 	public ComboBox<String> language;
 	@FXML
-	public Button name_submit_button;
+	public Button nameSubmitButton;
+	@FXML
+	public Button newFileBackButton;
 //	@FXML
 //	public Menu newfile;
 	@FXML
@@ -132,7 +134,11 @@ public class MainWinController
 		
 	}
 	@FXML
-	public void name_submit_buttonSetOnAction(){
+	public void newFileBackButtonSetOnAction(){
+		newFileAnchorPane.setVisible(false);
+	}
+	@FXML
+	public void nameSubmitButtonSetOnAction(){
 		
 		filename = filename_field.getText();
 		System.out.println(filename);

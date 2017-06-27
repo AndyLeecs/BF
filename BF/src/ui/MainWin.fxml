@@ -60,7 +60,6 @@
          </image>
       </ImageView>
       <Label alignment="CENTER" layoutY="528.0" prefHeight="30.0" prefWidth="600.0" text="input" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-      <Button fx:id="user" layoutY="2.0" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="191.0" wrapText="true" />
       <TextArea fx:id="inputTextArea" layoutY="558.0" maxHeight="280.0" prefHeight="280.0" prefWidth="592.0" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <Label alignment="CENTER" layoutX="592.0" layoutY="528.0" prefHeight="30.0" prefWidth="600.0" text="output" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
       <ImageView fitHeight="30.0" fitWidth="1200.0" layoutY="528.0" opacity="0.42" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
@@ -80,9 +79,10 @@
                <children>
                   <TextArea fx:id="filename_field" maxHeight="36.0" maxWidth="242.0" minHeight="36.0" minWidth="242.0" wrapText="true" />
                   <ComboBox fx:id="language" editable="false" prefWidth="150.0" />
-                  <Button fx:id="name_submit_button" mnemonicParsing="false" onAction="#name_submit_buttonSetOnAction" text="OK" />
+                  <Button fx:id="nameSubmitButton" mnemonicParsing="false" onAction="#nameSubmitButtonSetOnAction" text="OK" />
                </children>
             </HBox>
+            <Button fx:id="newFileBackButton" layoutX="218.0" layoutY="14.0" mnemonicParsing="false" onAction="#newFileBackButtonSetOnAction" text="Back" />
          </children>
       </AnchorPane>
    </children>
