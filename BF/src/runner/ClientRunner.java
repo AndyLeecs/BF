@@ -1,6 +1,5 @@
 package runner;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -8,69 +7,81 @@ import java.rmi.RemoteException;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.stage.Stage;
 import rmi.RemoteHelper;
-import service.IOService;
 import service.Language;
 import ui.Login;
-import ui.MainFrame;
 
-public class ClientRunner {
+/**
+ * 连接到服务器 初始化GUI
+ */
+public class ClientRunner
+{
+	public static void main(String[] args)
+	{
+		new ClientRunner();
+		System.out.println("main");
+		// cr.test();
+	}
+
 	private RemoteHelper remoteHelper;
-	
-	public ClientRunner() {
+
+	public ClientRunner()
+	{
 		linkToServer();
 		System.out.println("clientrunner");
-		final JFXPanel fxPanel = new JFXPanel();
+		new JFXPanel();
 		initGUI();
 	}
-	
-	private void linkToServer() {
-		try {
+
+	private void initGUI()
+	{
+
+		Platform.runLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				try
+				{
+					new Login();
+
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+
+			}
+		});
+	}
+
+	private void linkToServer()
+	{
+		try
+		{
 			remoteHelper = RemoteHelper.getInstance();
 			remoteHelper.setRemote(Naming.lookup("rmi://localhost:8887/DataRemoteObject"));
 			System.out.println("linked");
-		} catch (MalformedURLException e) {
+		} catch (MalformedURLException e)
+		{
 			e.printStackTrace();
-		} catch (RemoteException e) {
+		} catch (RemoteException e)
+		{
 			e.printStackTrace();
-		} catch (NotBoundException e) {
+		} catch (NotBoundException e)
+		{
 			e.printStackTrace();
 		}
 	}
-	
-	private void initGUI() {
 
-			Platform.runLater(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					try
-					{
-						new Login();
-
-					} catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-
-				}
-			});
-	}
-	
-	public void test(){
-		try {
+	public void test()
+	{
+		try
+		{
 			System.out.println(remoteHelper.getUserService().login("admin", "123456a"));
-			System.out.println(remoteHelper.getIOService().writeFile("2", "admin", "testFile",Language.bf));
-		} catch (RemoteException e) {
+			System.out.println(remoteHelper.getIOService().writeFile("2", "admin", "testFile", Language.bf));
+		} catch (RemoteException e)
+		{
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args){
-		ClientRunner cr = new ClientRunner();
-		System.out.println("main");
-		//cr.test();
 	}
 }

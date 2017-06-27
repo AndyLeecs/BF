@@ -4,33 +4,42 @@ import java.io.File;
 
 import service.Language;
 
-/**  
-* 存储现在程序的情况
-*  
-* @author Andy
-* @version  
-*/
+/**
+ * 存储现在程序的情况
+ * 
+ * @author qwe
+ */
 
 public class State
 {
+	/**
+	 * 用户名
+	 */
 	private static String username;
 
-private static Language language = Language.bf;
+	/**
+	 * 语言类型
+	 */
+	private static Language language = Language.bf;
 
-private static String filename;
+	/**
+	 * 文件名
+	 */
+	private static String filename;
 
-private static boolean fileCreated = false;
+	/**
+	 * 是否成功创建新文件
+	 */
+	private static boolean fileCreated = false;
 
-	private static File[] files;//获取该文件夹下所有的文件(夹)名
-	
-	public static String getUsername()
+	/**
+	 * 该文件夹下所有的文件(夹)名
+	 */
+	private static File[] files;
+
+	public static String getFilename()
 	{
-		return username;
-	}
-
-	public static void setUsername(String username)
-	{
-		State.username = username;
+		return filename;
 	}
 
 	public static File[] getFiles()
@@ -38,30 +47,14 @@ private static boolean fileCreated = false;
 		return files;
 	}
 
-	public void setFiles(File[] files)
-	{
-		this.files = new File(username).listFiles();
-		
-	}
-
 	public static Language getLanguage()
 	{
 		return language;
 	}
 
-	public static void setLanguage(Language l)
+	public static String getUsername()
 	{
-		State.language= l;
-	}
-
-	public static String getFilename()
-	{
-		return filename;
-	}
-
-	public static void setFilename(String filename)
-	{
-		State.filename = filename;
+		return username;
 	}
 
 	public static boolean isFileCreated()
@@ -72,5 +65,26 @@ private static boolean fileCreated = false;
 	public static void setFileCreated(boolean fileCreated)
 	{
 		State.fileCreated = fileCreated;
+	}
+
+	public static void setFilename(String filename)
+	{
+		State.filename = filename;
+	}
+
+	public static void setLanguage(Language l)
+	{
+		State.language = l;
+	}
+
+	public static void setUsername(String username)
+	{
+		State.username = username;
+	}
+
+	public void setFiles(File[] files)
+	{
+		State.files = new File(username).listFiles();
+
 	}
 }
