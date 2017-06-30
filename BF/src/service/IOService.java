@@ -42,4 +42,36 @@ public interface IOService extends Remote
 	 * @throws RemoteException
 	 */
 	public String[] writeFile(String file, String userId, String fileName, Language l) throws RemoteException;
+
+	/**
+	 * @param code
+	 *            当前用户输入的代码
+	 * @return 本次输入代码保存的版本
+	 * @throws RemoteException
+	 */
+	public int writeTemp(String code) throws RemoteException;
+
+	/**
+	 * @param version
+	 *            本次版本
+	 * @return 上一个版本的代码
+	 * @throws RemoteException
+	 */
+	public String readTempBack(int version) throws RemoteException;
+
+	/**
+	 * @param version
+	 *            本次版本
+	 * @return 下一个版本的代码
+	 * @throws RemoteException
+	 */
+	public String readTempForward(int version) throws RemoteException;
+
+	/**
+	 * 清空临时文件夹
+	 * 
+	 * @throws RemoteException
+	 */
+	public void clearTemp() throws RemoteException;
+
 }

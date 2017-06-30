@@ -52,6 +52,12 @@
             </items>
           </Menu>
           <Menu fx:id="version" mnemonicParsing="false" onShowing="#versionSetOnAction" text="Version" />
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem fx:id="undo" mnemonicParsing="false" onAction="#undoSetOnAction" text="undo" />
+                  <MenuItem fx:id="redo" mnemonicParsing="false" onAction="#redoSetOnAction" text="redo" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
       <ImageView fitHeight="280.0" fitWidth="7.0" layoutX="592.0" layoutY="556.0" opacity="0.55" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">

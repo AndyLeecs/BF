@@ -36,6 +36,17 @@ public class MainWinController
 		@Override
 		public void handle(ActionEvent event)
 		{
+			// 清空临时文件夹
+			try
+			{
+				System.out.println("clear temp");
+
+				RemoteHelper.getInstance().getIOService().clearTemp();
+			} catch (RemoteException e2)
+			{
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			// 读取该文件
 			String result = "";
 			try
@@ -46,11 +57,24 @@ public class MainWinController
 			{
 				e.printStackTrace();
 			}
+
 			// 把读取的内容显示在ui界面上
 			mainTextArea.setText(result);
 			inputTextArea.setText("");
 			outputLabel.setText("");
 			lastcode = result;
+			State.setVersion(0);
+			State.setLatestVersion(1);
+			// //存储第一次的版本
+			// try
+			// {
+			// State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
+			// State.setLatestVersion(0);
+			// } catch (RemoteException e)
+			// {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
 
 			// 允许用户输入
 			mainTextArea.setDisable(false);
@@ -89,10 +113,19 @@ public class MainWinController
 	// 历史版本菜单项的监听
 	private class versionItemEventHandler implements EventHandler<ActionEvent>
 	{
-
 		@Override
 		public void handle(ActionEvent event)
 		{
+
+			// 清空临时文件夹
+			try
+			{
+				RemoteHelper.getInstance().getIOService().clearTemp();
+			} catch (RemoteException e2)
+			{
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 
 			// 读选择的文件
 			String result = "";
@@ -119,6 +152,19 @@ public class MainWinController
 			mainTextArea.setDisable(false);
 			inputTextArea.setDisable(false);
 			outputLabel.setDisable(false);
+
+			State.setVersion(0);
+			State.setLatestVersion(1);
+			// //存储第一次的版本
+			// try
+			// {
+			// State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
+			// State.setLatestVersion(0);
+			// } catch (RemoteException e)
+			// {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
 
 			// 获取历史版本
 			try
@@ -231,18 +277,46 @@ public class MainWinController
 	 */
 	@FXML
 	public MenuItem exit;
+	/**
+	 * 执行操作的菜单
+	 */
 	@FXML
 	public Menu execute;
 
+	/**
+	 * 运行代码的菜单项
+	 */
 	@FXML
 	public MenuItem run;
+	/**
+	 * 查看当前文件版本的菜单
+	 */
 	@FXML
 	public Menu version;
+	/**
+	 * 登出的菜单项
+	 */
 	@FXML
 	public MenuItem logout;
+	/**
+	 * 撤销的菜单项
+	 */
+	@FXML
+	public MenuItem undo;
+	/**
+	 * 重做的菜单项
+	 */
+	@FXML
+	public MenuItem redo;
 
+	/**
+	 * 文件名
+	 */
 	String filename = "";
 
+	/**
+	 * 上一次代码
+	 */
 	String lastcode = "";
 
 	@FXML
@@ -254,6 +328,15 @@ public class MainWinController
 	@FXML
 	public void exitSetOnAction()
 	{
+		// 清空临时文件夹
+		try
+		{
+			RemoteHelper.getInstance().getIOService().clearTemp();
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Platform.runLater(() ->
 		{
 
@@ -266,6 +349,17 @@ public class MainWinController
 			// StorySelectBox ssb = new StorySelectBox(9);
 			// gridpane.getScene().getWindow().hide();
 		});
+
+		try
+		{
+			RemoteHelper.getInstance().getIOService().clearTemp();
+			State.setVersion(1);
+			State.setLatestVersion(1);
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -309,6 +403,21 @@ public class MainWinController
 	@FXML
 	public void logoutSetOnAction()
 	{
+		// 清空临时文件夹
+		try
+		{
+			RemoteHelper.getInstance().getIOService().clearTemp();
+
+			State.setVersion(1);
+			State.setLatestVersion(1);
+
+			RemoteHelper.getInstance().getUserService().logout(State.getUsername());
+
+		} catch (RemoteException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Platform.runLater(() ->
 		{
 			try
@@ -392,6 +501,19 @@ public class MainWinController
 		// 如果文件名非空，更新文件列表
 		if (!filename.equals(""))
 		{
+			// 清空临时文件夹
+			try
+			{
+				RemoteHelper.getInstance().getIOService().clearTemp();
+				State.setVersion(1);
+				State.setLatestVersion(1);
+
+			} catch (RemoteException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 			try
 			{
 				RemoteHelper.getInstance().getIOService().readFileList(State.getUsername(), State.getLanguage());
@@ -409,6 +531,17 @@ public class MainWinController
 			mainTextArea.setText("");
 			inputTextArea.setText("");
 			outputLabel.setText("");
+
+			// 存储第一次的版本
+			try
+			{
+				State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
+			} catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			// 允许用户输入
 			mainTextArea.setDisable(false);
 			inputTextArea.setDisable(false);
@@ -522,6 +655,7 @@ public class MainWinController
 	@FXML
 	public void saveSetOnAction()
 	{
+
 		System.out.println(lastcode);
 		String code = mainTextArea.getText();
 		System.out.println(code);
@@ -618,6 +752,77 @@ public class MainWinController
 			e1.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * 如果当前不是尚未更改的版本，回到上一个版本
+	 */
+	@FXML
+	public void undoSetOnAction()
+	{
+		System.out.println("undo pressed");
+		System.out.println(State.getVersion() + "");
+		System.out.println(State.getLatestVersion() + "");
+		System.out.println("code before undo" + mainTextArea.getText());
+
+		// undo之前保存一次当前版本
+		if ((State.getVersion() == State.getLatestVersion()))
+			try
+			{
+				System.out.println(mainTextArea.getText());
+				System.out.println("in undo writes");
+				State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
+			} catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		State.setLatestVersion();
+		System.out.println(State.getVersion());
+
+		// 检查当前是否是尚未操作状态
+		if ((filename != "") && State.getVersion() >= 1)
+		{
+			try
+			{
+				System.out.println(State.getVersion() + "");
+				String code = RemoteHelper.getInstance().getIOService().readTempForward(State.getVersion());
+				mainTextArea.setText(code);
+				State.setVersionAfterUndo();
+			} catch (RemoteException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 如果当前不是最后存入的版本，回到下一版本
+	 */
+	@FXML
+	public void redoSetOnAction()
+	{
+		System.out.println("redo pressed");
+		System.out.println("version" + State.getVersion());
+		System.out.println("latestversion" + State.getLatestVersion());
+		// System.exit(0);
+		// 检查当前是否是记录的最后一次操作
+		if ((filename != "") && ((State.getVersion()) < State.getLatestVersion()))
+		{
+			try
+			{
+				System.out.println(State.getVersion() + "");
+				String code = RemoteHelper.getInstance().getIOService().readTempBack(State.getVersion());
+				mainTextArea.setText(code);
+				State.setVersionAfterRedo();
+			} catch (RemoteException e)
+			{
+				e.printStackTrace();
+			}
+
+			State.setVersion(State.getVersion() - 1);
+			State.setLatestVersion();
+		}
 	}
 
 }

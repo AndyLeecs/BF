@@ -143,6 +143,7 @@ public class LoginController
 								{
 									State.setUsername(textField.getText());
 									new MainWin();
+
 								} catch (IOException e)
 								{
 									// TODO Auto-generated catch block
@@ -179,8 +180,10 @@ public class LoginController
 					});
 				else
 				{
-					// 如果用户不存在或者密码错误
-					tip.setText("   正常人不让进的");
+					// 如果用户不存在
+					// 或者密码错误
+					// 或者已经登入了
+					tip.setText("   像你这种不让进的");
 
 				}
 			} catch (RemoteException e)

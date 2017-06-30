@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import thread.ReaderThread;
 
 /**
  * 主窗口
@@ -21,7 +22,13 @@ public class MainWin extends Stage
 
 	public MainWin() throws IOException
 	{
-		gridpane = FXMLLoader.load(getClass().getResource("MainWin.fxml"));
+		// gridpane = FXMLLoader.load(getClass().getResource("MainWin.fxml"));
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("MainWin.fxml"));
+		gridpane = loader.load();
+
+		Thread reader = new ReaderThread((MainWinController) loader.getController());
+		reader.start();
 
 		Scene scene = new Scene(gridpane, 1180, 800);
 		scene.setFill(Color.TRANSPARENT);
