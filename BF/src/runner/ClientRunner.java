@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import rmi.RemoteHelper;
 import service.Language;
+import thread.ShutThread;
 import ui.Login;
 
 /**
@@ -21,6 +22,7 @@ public class ClientRunner
 		new ClientRunner();
 		System.out.println("main");
 		// cr.test();
+		Runtime.getRuntime().addShutdownHook(new ShutThread());  
 	}
 
 	private RemoteHelper remoteHelper;
