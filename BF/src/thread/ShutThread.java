@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 
 import rmi.RemoteHelper;
 
-
 /**
  * 程序结束之前登出，并清空临时文件
  * 
@@ -19,6 +18,7 @@ public class ShutThread extends Thread
 	{
 		try
 		{
+			System.out.println("Shut thread running");
 			RemoteHelper.getInstance().getIOService().clearTemp();
 			RemoteHelper.getInstance().getUserService().logout(ui.State.getUsername());
 

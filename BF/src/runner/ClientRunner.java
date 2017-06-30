@@ -22,7 +22,7 @@ public class ClientRunner
 		new ClientRunner();
 		System.out.println("main");
 		// cr.test();
-		Runtime.getRuntime().addShutdownHook(new ShutThread());  
+		Runtime.getRuntime().addShutdownHook(new ShutThread());
 	}
 
 	private RemoteHelper remoteHelper;

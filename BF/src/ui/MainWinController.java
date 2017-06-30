@@ -107,6 +107,20 @@ public class MainWinController
 				e1.printStackTrace();
 			}
 
+			// 写入初始文件的状态
+
+			try
+			{
+				System.out.println(mainTextArea.getText());
+				System.out.println("in undo writes");
+				State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
+			} catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			State.setLatestVersion();
+			System.out.println(State.getVersion());
 		}
 	}
 
@@ -375,6 +389,7 @@ public class MainWinController
 		language.setValue("bf");
 		filename = "";
 
+		mainTextArea.setFocusTraversable(false);
 		try
 		{
 
@@ -580,6 +595,7 @@ public class MainWinController
 	public void openSetOnAction()
 	{
 		System.out.println("open is clicked");
+		newFileAnchorPane.setVisible(false);
 		// 读文件列表
 		try
 		{
@@ -646,6 +662,7 @@ public class MainWinController
 		{
 			e1.printStackTrace();
 		}
+		newFileAnchorPane.setVisible(false);
 
 	}
 
@@ -719,6 +736,7 @@ public class MainWinController
 				e1.printStackTrace();
 			}
 		}
+		newFileAnchorPane.setVisible(false);
 
 	}
 
@@ -751,6 +769,7 @@ public class MainWinController
 		{
 			e1.printStackTrace();
 		}
+		newFileAnchorPane.setVisible(false);
 
 	}
 
@@ -760,10 +779,11 @@ public class MainWinController
 	@FXML
 	public void undoSetOnAction()
 	{
-		System.out.println("undo pressed");
-		System.out.println(State.getVersion() + "");
-		System.out.println(State.getLatestVersion() + "");
-		System.out.println("code before undo" + mainTextArea.getText());
+
+		// System.out.println("undo pressed");
+		// System.out.println(State.getVersion() + "");
+		// System.out.println(State.getLatestVersion() + "");
+		// System.out.println("code before undo" + mainTextArea.getText());
 
 		// undo之前保存一次当前版本
 		if ((State.getVersion() == State.getLatestVersion()))
@@ -778,8 +798,8 @@ public class MainWinController
 				e.printStackTrace();
 			}
 		State.setLatestVersion();
-		System.out.println(State.getVersion());
-
+		// System.out.println(State.getVersion());
+		//
 		// 检查当前是否是尚未操作状态
 		if ((filename != "") && State.getVersion() >= 1)
 		{
@@ -794,6 +814,7 @@ public class MainWinController
 				e.printStackTrace();
 			}
 		}
+		newFileAnchorPane.setVisible(false);
 	}
 
 	/**
@@ -802,9 +823,9 @@ public class MainWinController
 	@FXML
 	public void redoSetOnAction()
 	{
-		System.out.println("redo pressed");
-		System.out.println("version" + State.getVersion());
-		System.out.println("latestversion" + State.getLatestVersion());
+		// System.out.println("redo pressed");
+		// System.out.println("version" + State.getVersion());
+		// System.out.println("latestversion" + State.getLatestVersion());
 		// System.exit(0);
 		// 检查当前是否是记录的最后一次操作
 		if ((filename != "") && ((State.getVersion()) < State.getLatestVersion()))
@@ -820,8 +841,9 @@ public class MainWinController
 				e.printStackTrace();
 			}
 
-			State.setVersion(State.getVersion() - 1);
+			// State.setVersion(State.getVersion() - 1);
 			State.setLatestVersion();
+			newFileAnchorPane.setVisible(false);
 		}
 	}
 

@@ -45,7 +45,7 @@ public class State
 	/**
 	 * 最后存入的版本号
 	 */
-	private static int latestVersion = 1;
+	private static int latestVersion = 0;
 
 	public static String getFilename()
 	{
@@ -134,8 +134,8 @@ public class State
 	 */
 	public static void setLatestVersion()
 	{
-		// if(State.version>State.latestVersion)
-		State.latestVersion = State.version;
+		if (State.version > State.latestVersion)
+			State.latestVersion = State.version;
 	}
 
 	/**
