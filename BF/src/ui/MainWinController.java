@@ -112,14 +112,14 @@ public class MainWinController
 			try
 			{
 				System.out.println(mainTextArea.getText());
-				System.out.println("in undo writes");
+				System.out.println("in initial writes");
 				State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
 			} catch (RemoteException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			State.setLatestVersion();
+			State.setLatestVersion(0);
 			System.out.println(State.getVersion());
 		}
 	}
@@ -168,7 +168,7 @@ public class MainWinController
 			outputLabel.setDisable(false);
 
 			State.setVersion(0);
-			State.setLatestVersion(1);
+			State.setLatestVersion(0);
 			// //存储第一次的版本
 			// try
 			// {
@@ -595,7 +595,7 @@ public class MainWinController
 	public void openSetOnAction()
 	{
 		System.out.println("open is clicked");
-		newFileAnchorPane.setVisible(false);
+//		newFileAnchorPane.setVisible(false);
 		// 读文件列表
 		try
 		{
@@ -662,7 +662,7 @@ public class MainWinController
 		{
 			e1.printStackTrace();
 		}
-		newFileAnchorPane.setVisible(false);
+//		newFileAnchorPane.setVisible(false);
 
 	}
 
@@ -736,7 +736,7 @@ public class MainWinController
 				e1.printStackTrace();
 			}
 		}
-		newFileAnchorPane.setVisible(false);
+//		newFileAnchorPane.setVisible(false);
 
 	}
 
@@ -780,18 +780,21 @@ public class MainWinController
 	public void undoSetOnAction()
 	{
 
-		// System.out.println("undo pressed");
-		// System.out.println(State.getVersion() + "");
-		// System.out.println(State.getLatestVersion() + "");
-		// System.out.println("code before undo" + mainTextArea.getText());
+		System.out.println("undo pressed");
+		System.out.println(State.getVersion() + "");
+		System.out.println(State.getLatestVersion() + "");
+		System.out.println("code before undo" + mainTextArea.getText());
 
 		// undo之前保存一次当前版本
 		if ((State.getVersion() == State.getLatestVersion()))
 			try
 			{
 				System.out.println(mainTextArea.getText());
-				System.out.println("in undo writes");
-				State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
+				System.out.println("in equal version writes");
+				if (RemoteHelper.getInstance().getIOService().check(mainTextArea.getText()))
+					State.setVersion(RemoteHelper.getInstance().getIOService().writeTemp(mainTextArea.getText()));
+				System.out.println(mainTextArea.getText());
+				System.out.println(State.getVersion());
 			} catch (RemoteException e)
 			{
 				// TODO Auto-generated catch block

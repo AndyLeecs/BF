@@ -88,19 +88,22 @@ public class ReaderThread extends Thread
 				try
 				{
 					System.out.println(controller.mainTextArea.getText());
-					ui.State.setVersion(
-							RemoteHelper.getInstance().getIOService().writeTemp(controller.mainTextArea.getText()));
-					ui.State.setLatestVersion();
-					System.out.println(ui.State.getVersion() + "");
-					System.out.println(ui.State.getLatestVersion() + "");
+					if (RemoteHelper.getInstance().getIOService().check(controller.mainTextArea.getText()))
+					{
+						ui.State.setVersion(
+								RemoteHelper.getInstance().getIOService().writeTemp(controller.mainTextArea.getText()));
+						ui.State.setLatestVersion();
+						System.out.println(ui.State.getVersion() + "");
+						System.out.println(ui.State.getLatestVersion() + "");
+					}
 				} catch (RemoteException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				time1 = time2;
 			}
-			time1 = time2;
+			// time1 = time2;
 
 		}
 
